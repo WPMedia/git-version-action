@@ -1,19 +1,63 @@
+/**
+ * index.js
+ *
+ *  Created by cannonrp on 2020/02/20.
+ *  Copyright © 2020 The Washington Post. All rights reserved.
+ */
 const core = require('@actions/core');
-const wait = require('./wait');
-
+const exec = require('@actions/exec');
 
 // most @actions toolkit packages have async methods
 async function run() {
-  try { 
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
+  try {
+    let output = '';
+    let error = '';
 
-    core.debug((new Date()).toTimeString())
-    await wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
+    const options = {
+      listeners: {
+        stdout: (data) => { output += data.toString(); },
+        stderr: (data) => { error += data.toString() }
+      }
+    };
 
-    core.setOutput('time', new Date().toTimeString());
-  } 
+    const parseVar = (dict, text) => {
+      if (!text) {
+        return dict;
+      }
+
+      const parts = text.trim().split('=', 2);
+
+      if (parts.length !== 2) {
+        console.log(`Warning: could not parse '${text}'`);
+        return dict;
+      }
+
+      const key = parts[0];
+      const value = parts[1];
+
+      console.log(`Added var ${key}=${value}`);
+      return { ...dict, [key]: value };
+    };
+
+    const success = await exec.exec('bash git-version.sh', [], options);
+
+    if (error) {
+      console.log('ERROR', error);
+    }
+
+    if (success == 0) {
+      const lines = output.split('\n');
+      const dict = lines.reduce(parseVar, {});
+
+      Object.keys(dict).forEach((key) => {
+        core.setOutput(`git_${key}`, dict[key]);
+      })
+
+      console.log('Success!', dict);
+    } else {
+      console.log(`Error Returned ${success}!`);
+    }
+  }
   catch (error) {
     core.setFailed(error.message);
   }

@@ -1,13 +1,21 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Git Version'
+description: 'Output a deterministic semantic version'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
 outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  git_version:
+  git_author:
+  git_author_email:
+  git_branch:
+  git_branch_clean:
+  git_commit:
+  git_commit_short:
+  git_commit_timestamp:
+  git_commit_epoch:
+  git_commit_message:
+  git_ag:
+  git_tag_long:
+  git_version:
+    description: 'The version based on the git metadata'
 runs:
   using: 'node12'
   main: 'dist/index.js'
