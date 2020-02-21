@@ -1,70 +1,66 @@
 
 <p align="center">
-  <a href="https://github.com/actions/javascript-action/actions"><img alt="javscript-action status" src="https://github.com/actions/javascript-action/workflows/units-test/badge.svg"></a>
+  <a href="https://github.com/WPMedia/git-version-action/actions"><img alt="git-version-action status" src="https://github.com/WPMedia/git-version-action/workflows/units-test/badge.svg"></a>
 </p>
 
-# Create a JavaScript Action
+# git-version-action
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+## Automatic Versioning
 
-This template includes tests, linting, a validation workflow, publishing, and versioning guidance.  
+Use this action to generate automatic versions based on the git history. The action combines
+tag, branch, and distance from tag information to build a version that conforms to semver
+(assuming the last tag is in the form `v?\d.\d\.d`). This makes it easier to run automated
+builds based on commits and building feature branches.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
+## Output of this action
 
 Click the `Use this Template` and provide the new repo details for your action
 
-## Code in Master
+    git_author=Robert Cannon
+    git_author_email=dev@test.com
+    git_branch=master
+    git_branch_clean=master
+    git_commit=23b5639c2958851c59597102bfbddecc671fe485
+    git_commit_short=23b5639
+    git_commit_timestamp=2020-02-21 09:11:46 -0500
+    git_commit_epoch=1582294306
+    git_commit_message=Removed the unused 'inputs' from the action.yml
+    git_tag=0.1.0
+    git_tag_long=0.1.0-1-g23b5639
 
-Install the dependencies  
+    git_version=0.1.0-master.1
+
+## Usage
+
+_:construction: Better examples needed :construction:_
+
+You can consume the action by referencing the v1 branch
+
+```yaml
+uses: WPMedia/git-version-action@v1
+```
+
+See the [actions tab](https://github.com/WPMedia/git-version-action/actions) for runs of this action! :rocket:
+
+## Developing this action
+
+### Setup
+
+Install the dependencies
 ```bash
 $ npm install
 ```
 
-Run the tests :heavy_check_mark:  
+Run the tests :heavy_check_mark:
 ```bash
 $ npm test
 
  PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
 
 ...
 ```
 
-## Change action.yml
-
-The action.yml contains defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-const core = require('@actions/core');
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Package for distribution
+### Package for distribution
 
 GitHub Actions will run the entry point from the action.yml. Packaging assembles the code into one file that can be checked in to Git, enabling fast and reliable execution and preventing the need to check in node_modules.
 
@@ -97,18 +93,6 @@ $ git commit -a -m "v1 release"
 $ git push origin v1
 ```
 
-Your action is now published! :rocket: 
+Your action is now published! :rocket:
 
 See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Usage
-
-You can now consume the action by referencing the v1 branch
-
-```yaml
-uses: actions/javascript-action@v1
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
