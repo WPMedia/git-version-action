@@ -1,6 +1,5 @@
 name: 'Git Version'
 description: 'Output a deterministic semantic version'
-inputs:
 outputs:
   git_author:
   git_author_email:
