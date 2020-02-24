@@ -5,9 +5,8 @@ on:
       - v*
 
 jobs:
-  # unit tests
-  github-packages:
-    name: Publish Github Packages
+  npm-packages:
+    name: Publish NPM Packages
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -23,8 +22,7 @@ jobs:
         npm run package
     - name: Publish
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}
       run: |
-        echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> ~/.npmrc
+        echo '//registry.npmjs.org/:_authToken=${NPMJS_TOKEN}' >> .npmrc
         npm publish --registry https://npm.pkg.github.com
-
