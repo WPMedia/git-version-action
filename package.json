@@ -1,5 +1,5 @@
 {
-  "name": "@washingtonpost/git-version-action",
+  "name": "@wpmedia/git-version-action",
   "version": "0.1.6",
   "description": "JavaScript Action Template",
   "main": "index.js",
@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/WPMedia/git-version-action/issues"
   },
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/WPMedia/git-version-action#readme",
   "dependencies": {
     "@actions/core": "^1.1.1",
     "@actions/exec": "^1.0.3"
