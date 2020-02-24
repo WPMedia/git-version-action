@@ -21,6 +21,6 @@ jobs:
       run: |
         echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> ~/.npmrc
         npm version ${PACKAGE_VERSION}
-        npm package
+        npm run package
         npm publish --registry https://npm.pkg.github.com --tag ${PACKAGE_VERSION}
 
