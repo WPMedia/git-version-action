@@ -1,6 +1,6 @@
 {
   "name": "@washingtonpost/git-version-action",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "JavaScript Action Template",
   "main": "index.js",
   "scripts": {
