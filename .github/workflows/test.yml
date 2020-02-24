@@ -24,4 +24,5 @@ jobs:
       uses: ./
     - env:
         version: ${{steps.git_metadata.outputs.git_version}}
-      run: echo "This is my version: ${version}"
+      run: |-
+        echo "This is my version: ${version}"
