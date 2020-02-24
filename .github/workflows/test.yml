@@ -20,4 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ./
+    - Git Metadata
+      uses: ./
+    - env:
+        version: ${{steps.git_metadata.outputs.git_version}}
+      run: echo "This is my version: ${version}"
