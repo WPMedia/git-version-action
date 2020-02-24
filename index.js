@@ -4,6 +4,8 @@
  *  Created by cannonrp on 2020/02/20.
  *  Copyright © 2020 The Washington Post. All rights reserved.
  */
+const path = require('path');
+
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 
@@ -39,7 +41,8 @@ async function run() {
       return { ...dict, [key]: value };
     };
 
-    const success = await exec.exec('bash git-version.sh', [], options);
+    const scriptFilename = path.join(__dirname, 'git-version.sh');
+    const success = await exec.exec(`bash ${scriptFilename}`, [], options);
 
     if (error) {
       console.log('ERROR', error);
