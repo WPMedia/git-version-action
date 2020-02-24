@@ -25,6 +25,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> ~/.npmrc
+        npm config set '//npm.pkg.github.com/:_authToken' '${GITHUB_TOKEN}'
         npm publish --registry https://npm.pkg.github.com
 
