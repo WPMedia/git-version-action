@@ -16,7 +16,7 @@ jobs:
       uses: ./
     - name: Package
       env:
-        PACKAGE_VERSION: ${{steps.get-git-metadata.output.git_version}}
+        PACKAGE_VERSION: ${{steps.get-git-metadata.outputs.git_version}}
       run: |
         npm install
         npm version ${PACKAGE_VERSION}
