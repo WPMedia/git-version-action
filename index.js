@@ -22,25 +22,6 @@ async function run() {
       }
     };
 
-    const parseVar = (dict, text) => {
-      if (!text) {
-        return dict;
-      }
-
-      const parts = text.trim().split('=', 2);
-
-      if (parts.length !== 2) {
-        console.log(`Warning: could not parse '${text}'`);
-        return dict;
-      }
-
-      const key = parts[0];
-      const value = parts[1];
-
-      console.log(`Added var ${key}=${value}`);
-      return { ...dict, [key]: value };
-    };
-
     const scriptFilename = path.join(__dirname, 'git-version.sh');
     const success = await exec.exec(`bash ${scriptFilename}`, [], options);
 
@@ -50,13 +31,32 @@ async function run() {
 
     if (success == 0) {
       const lines = output.split('\n');
-      const dict = lines.reduce(parseVar, {});
+      const dict = lines.reduce((dict, text) => {
+        if (!text) {
+          return dict;
+        }
+
+        const parts = text.trim().split('=', 2);
+
+        if (parts.length !== 2) {
+          console.log(`Warning: could not parse '${text}'`);
+          return dict;
+        }
+
+        const key = parts[0];
+        const value = parts[1];
+
+        return { ...dict, [key]: value };
+      }, {});
 
       Object.keys(dict).forEach((key) => {
-        core.setOutput(`git_${key}`, dict[key]);
+        const name = `git_${key}`;
+        const value = dict[key];
+        console.log(`Set Output '${name}' = '${value}'`)
+        core.setOutput(name, value);
       })
 
-      console.log('Success!', dict);
+      console.log('Finished');
     } else {
       console.log(`Error Returned ${success}!`);
     }
