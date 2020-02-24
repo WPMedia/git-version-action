@@ -1,6 +1,6 @@
 {
-  "name": "javascript-action",
-  "version": "1.0.0",
+  "name": "git-version-action",
+  "version": "0.1.1",
   "description": "JavaScript Action Template",
   "main": "index.js",
   "scripts": {
@@ -10,17 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/WPMedia/git-version-action.git"
   },
   "keywords": [
     "GitHub",
     "Actions",
     "JavaScript"
   ],
-  "author": "GitHub",
-  "license": "MIT",
+  "author": "Washington Post",
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/WPMedia/git-version-action/issues"
   },
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
