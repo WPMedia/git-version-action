@@ -10,8 +10,9 @@ jobs:
     name: Publish Github Packages
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - Get Git Metadata
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Get Git Metadata
       uses: ./
     - name: Publish
       env:
