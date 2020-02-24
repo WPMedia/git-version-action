@@ -24,8 +24,7 @@ jobs:
     - name: Publish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PACKAGE_VERSION: ${{steps.get-git-metadata.output.git_version}}
       run: |
         echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> ~/.npmrc
-        npm publish --registry https://npm.pkg.github.com --tag ${PACKAGE_VERSION}
+        npm publish --registry https://npm.pkg.github.com
 
