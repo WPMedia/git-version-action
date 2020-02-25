@@ -15,19 +15,20 @@ jobs:
     - run: npm ci
     - run: npm test
 
-  # test action works running from the graph
+  # test action works running with actions/checkout@v1
   test-v1:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - id: git_metadata
       uses: ./
+    # example usage
     - env:
         version: ${{steps.git_metadata.outputs.git_version}}
       run: |-
         echo "This is my version: ${version}"
 
-  # test action works running from the graph
+  # test action works running with actions/checkout@v2
   test-v2:
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +39,7 @@ jobs:
     - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - id: git_metadata
       uses: ./
+    # example usage
     - env:
         version: ${{steps.git_metadata.outputs.git_version}}
       run: |-

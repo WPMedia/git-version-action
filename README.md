@@ -32,15 +32,49 @@ Click the `Use this Template` and provide the new repo details for your action
 
 ## Usage
 
-_:construction: Better examples needed :construction:_
-
-You can consume the action by referencing the v1 branch
+You can consume the action by referencing the v0.1.8 tag
 
 ```yaml
-uses: WPMedia/git-version-action@v1
+steps:
+  - uses: WPMedia/git-version-action@v0.1.8
 ```
 
 See the [actions tab](https://github.com/WPMedia/git-version-action/actions) for runs of this action! :rocket:
+
+## Example
+
+```yaml
+# test action works running with actions/checkout@v1
+test-v1:
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/checkout@v1
+  - id: git_metadata
+    uses: WPMedia/git-version-action@v0.1.8
+  # example usage
+  - env:
+      version: ${{steps.git_metadata.outputs.git_version}}
+    run: |-
+      echo "This is my version: ${version}"
+```
+
+## Example with actions/checkout@v2
+
+Note that `actions/checkout@v2` does not fetch the entire branch and tag history. Use the following to make it work with `v2`
+
+```yaml
+steps:
+  # ...
+  - uses: actions/checkout@v2
+    with:
+      # Required to get the full history for git_metadata
+      fetch-depth: 0
+  - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+```
+
+## Example from private repo
+
+_:construction: Example is in progress :construction:_
 
 ## Developing this action
 
