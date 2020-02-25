@@ -23,7 +23,8 @@ REGEX_VERSION='^(.*\/)?[0-9]+\.[0-9]+(\.[0-9]+)?$'
 
 if [ "$BUILD_GIT_TAG_LONG" = "" ]; then
   # Without a tag, we can't get the distance from describe so making it up here with time and hash
-  export BUILD_VERSION=0.0.0-${BUILD_GIT_BRANCH_CLEAN}.t${BUILD_GIT_COMMIT_EPOCH}.g${BUILD_GIT_COMMIT_SHORT}
+  timestamp=$(date +%Y%m%d.%H%M%S ${BUILD_GIT_COMMIT_TIMESTAMP})
+  export BUILD_VERSION=0.0.0-${BUILD_GIT_BRANCH_CLEAN}.t${timestamp}-g${BUILD_GIT_COMMIT_SHORT}
 elif [ "$BUILD_GIT_TAG_LONG" = "$BUILD_GIT_TAG" ]; then
   export BUILD_VERSION=${BUILD_GIT_TAG}
 else
