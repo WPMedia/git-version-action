@@ -3,6 +3,10 @@
 # git-version.sh
 #
 
+# Fetch minimal tag and branch info to make `git describe` work
+git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+
 BUILD_GIT_BRANCH=`git branch -a --contains HEAD | grep -v '\(.*detached.*\)' | grep -v '\(no branch\)' | head -1 | cut -c 3-`
 BUILD_GIT_BRANCH=${BUILD_GIT_BRANCH#remotes/origin/}
 BUILD_GIT_BRANCH_CLEAN=$(echo "${BUILD_GIT_BRANCH}" | sed s/[^0-9A-Za-z-]/-/g)
