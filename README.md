@@ -32,11 +32,11 @@ Click the `Use this Template` and provide the new repo details for your action
 
 ## Usage
 
-You can consume the action by referencing the v0.1.8 tag
+You can consume the action by referencing the `v0.1.9` tag
 
 ```yaml
 steps:
-  - uses: WPMedia/git-version-action@v0.1.8
+  - uses: WPMedia/git-version-action@v0.1.9
 ```
 
 See the [actions tab](https://github.com/WPMedia/git-version-action/actions) for runs of this action! :rocket:
@@ -50,7 +50,7 @@ test-v1:
   steps:
   - uses: actions/checkout@v1
   - id: git_metadata
-    uses: WPMedia/git-version-action@v0.1.8
+    uses: WPMedia/git-version-action@v0.1.9
   # example usage
   - env:
       version: ${{steps.git_metadata.outputs.git_version}}
