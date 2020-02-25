@@ -33,8 +33,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        # Required to get the full info for git_metadata
+        # Required to get the full history for git_metadata
         fetch-depth: 0
+    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - id: git_metadata
       uses: ./
     - env:
