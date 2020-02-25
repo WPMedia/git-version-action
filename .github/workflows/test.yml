@@ -32,6 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        # Required to get the full info for git_metadata
+        fetch-depth: 0
     - id: git_metadata
       uses: ./
     - env:
