@@ -35,8 +35,7 @@ jobs:
       #with:
       #  # Required to get the full history for git_metadata
       #  fetch-depth: 0
-    #- run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-    - run: git fetch --dry-run
+    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - id: git_metadata
       uses: ./
     - env:
