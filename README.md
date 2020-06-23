@@ -13,15 +13,19 @@ tag, branch, and distance from tag information to build a version that conforms 
 
 When the commit is the same as as the latest tag, then the version is the tag.
 
-    v1.0.1
+    1.0.1
 
 For commits past the tag, the version is a combination of the tag, branch name, and number of commits since the last tag.
 
-    v1.0.1-main.1
+    1.0.1-main.1
 
 Any branch can have a version with a unique version.
 
-    v1.0.1-hostfix-fix-the-bug.3
+    1.0.1-hostfix-fix-the-bug.3
+
+The action looks for a tag on the current branch that has the pattern `v?\d.\d\.d`. If it doesn't find one it will fallback to using the timestamp and short commit hash.
+
+   0.0.0-main.t1592915661-g23b5639
 
 This makes it easier to run automated builds with versions that are semver compatible and contain a sequential build number.
 
