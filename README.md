@@ -65,7 +65,7 @@ test-v1:
   steps:
   - uses: actions/checkout@v1
   - id: git_metadata
-    uses: WPMedia/git-version-action@v0.1.9
+    uses: WPMedia/git-version-action@v1
   # example usage
   - env:
       version: ${{steps.git_metadata.outputs.git_version}}
