@@ -25,7 +25,7 @@ Any branch can have a version with a unique version.
 
 The action looks for a tag on the current branch that has the pattern `v?\d.\d\.d`. If it doesn't find one it will fallback to using the timestamp and short commit hash.
 
-   0.0.0-main.t1592915661-g23b5639
+    0.0.0-main.t1592915661-g23b5639
 
 This makes it easier to run automated builds with versions that are semver compatible and contain a sequential build number.
 
