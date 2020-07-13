@@ -47,11 +47,11 @@ This makes it easier to run automated builds with versions that are semver compa
 
 ## Usage
 
-You can consume the action by referencing the `v0.1.9` tag
+You can consume the action by referencing the `v1` branch
 
 ```yaml
 steps:
-  - uses: WPMedia/git-version-action@v0.1.9
+  - uses: WPMedia/git-version-action@v1
 ```
 
 See the [actions tab](https://github.com/WPMedia/git-version-action/actions) for runs of this action! :rocket:
@@ -86,3 +86,18 @@ steps:
       fetch-depth: 0
   - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 ```
+
+## Additional Notes
+
+### Branches
+
+The action uses `git branch -a --contains HEAD` to get a list of branches. In the case of multiple branches (which can happen after some merges), the action will pick from the following priority list if present.
+
+    main
+    master
+    develop
+    dev
+    sandbox
+    staging
+
+Otherwise, the action will pick the first entry in the list returned by git.

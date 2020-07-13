@@ -3,8 +3,32 @@
 # git-version.sh
 #
 
-BUILD_GIT_BRANCH=`git branch -a --contains HEAD | grep -v '\(.*detached.*\)' | grep -v '\(no branch\)' | head -1 | cut -c 3-`
-BUILD_GIT_BRANCH=${BUILD_GIT_BRANCH#remotes/origin/}
+BRANCH_PRIORITY_LIST=("main" "master" "develop" "dev" "sandbox" "staging")
+
+get_branch() {
+  branch_list=$(
+    git branch -a --contains HEAD \
+      | grep -v '\(.*detached.*\)' \
+      | grep -v '\(no branch\)' \
+      | cut -c 3- \
+      | sed s,^remotes/[^/]*/,,
+  )
+
+  # Backwards from what you might think, this takes the list of git branches and tests if
+  # any appear in the priority list. This allows the priority list to set the order, but
+  # may return nothing.
+  priority_branch=$(printf '%s\n' "${BRANCH_PRIORITY_LIST[@]}" | grep -wEm1 "$branch_list")
+  # Fallback to the first in the list
+  first_branch=$(printf '%s\n' "${branch_list[@]}" | head -1)
+
+  if [ "$priority_branch" = "" ]; then
+    echo $first_branch
+  else
+    echo $priority_branch
+  fi
+}
+
+BUILD_GIT_BRANCH=$(get_branch)
 BUILD_GIT_BRANCH_CLEAN=$(echo "${BUILD_GIT_BRANCH}" | sed s/[^0-9A-Za-z-]/-/g)
 BUILD_GIT_MESSAGE=`git log -1 --pretty=%B`
 BUILD_GIT_AUTHOR=`git log -1 --pretty=%an`
