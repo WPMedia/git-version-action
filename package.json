@@ -8,6 +8,11 @@
     "package": "ncc build index.js -o dist && cp git-version.sh dist/",
     "test": "eslint index.js && jest"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run package && git add -u dist/"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WPMedia/git-version-action.git"
@@ -29,6 +34,7 @@
   "devDependencies": {
     "@zeit/ncc": "^0.22.3",
     "eslint": "^7.3.0",
+    "husky": "^4.2.5",
     "jest": "^26.0.1"
   },
   "license": "MIT"
