@@ -2,16 +2,27 @@ name: 'Git Version'
 description: 'Output a deterministic semantic version'
 outputs:
   git_author:
+    description: 'The author of the last commit'
   git_author_email:
+    description: 'The author email of the last commit'
   git_branch:
+    description: 'The branch of the last commit'
   git_branch_clean:
+    description: 'The a semver sanitized version of the branch name'
   git_commit:
+    description: 'The commit hash of the last commit'
   git_commit_short:
+    description: 'The commit short hash of the last commit'
   git_commit_timestamp:
+    description: 'The timestamp of the last commit'
   git_commit_epoch:
+    description: 'The timestamp in epoch time of the last commit'
   git_commit_message:
-  git_ag:
+    description: 'The message of the last commit'
+  git_tag:
+    description: 'The git tag of the last commit'
   git_tag_long:
+    description: 'The long git tag of the last commit'
   git_version:
     description: 'The version based on the git metadata'
 runs:
